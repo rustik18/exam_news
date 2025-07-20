@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile – NewsHub</title>
+  <meta charset="UTF-8">
+  <title>Contact Us – NewsHub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -12,12 +11,12 @@
     }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+<body class="bg-gray-100 min-h-screen">
 
   <!-- Navbar -->
   <nav class="bg-white shadow-md p-4">
     <div class="container mx-auto flex justify-between items-center">
-      <a href="#" class="text-xl font-bold text-blue-600">NewsHub</a>
+      <a href="{% url 'news_list' %}" class="text-xl font-bold text-blue-600">NewsHub</a>
       <div class="space-x-4">
         <a href="{% url 'home' %}" class="text-gray-600 hover:text-blue-600 font-semibold">Home</a>
         <a href="{% url 'news_list' %}" class="text-gray-600 hover:text-blue-600">News</a>
@@ -47,39 +46,27 @@
   </div>
 {% endif %}
 
-  <!-- Profile Content -->
-  <main class="flex-grow flex items-center justify-center px-4 py-10">
-    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
-      <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Your Profile</h2>
 
-      <div class="space-y-4 text-gray-800">
+  <!-- Contact Form -->
+  <main class="container mx-auto px-4 py-12 max-w-xl">
+    <h1 class="text-3xl font-bold text-blue-600 mb-8 text-center">Contact Us</h1>
+
+    <form method="post" class="space-y-6 bg-white p-8 shadow-xl rounded-xl">
+      {% csrf_token %}
+      {% for field in form %}
         <div>
-          <span class="font-semibold">Username:</span>
-          <span>{{ user.username }}</span>
+          <label class="block text-gray-700 font-semibold mb-1">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <p class="text-red-600 text-sm mt-1">{{ field.errors.0 }}</p>
+          {% endif %}
         </div>
-        <div>
-          <span class="font-semibold">First Name:</span>
-          <span>{{ user.first_name }}</span>
-        </div>
-        <div>
-          <span class="font-semibold">Last Name:</span>
-          <span>{{ user.last_name }}</span>
-        </div>
-        <div>
-          <span class="font-semibold">Email:</span>
-          <span>{{ user.email }}</span>
-        </div>
-      </div>
+      {% endfor %}
 
-      <div class="mt-8 space-y-4">
-        <a href="{% url 'edit_profile' %}" class="block w-full text-center bg-yellow-500 text-white py-2 rounded-xl hover:bg-yellow-600 font-semibold">Edit Profile</a>
-
-        <a href="{% url 'change_pass' %}" class="block w-full text-center bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 font-semibold">Change Password</a>
-
-   <a href="{% url 'log_out' %}" class="block w-full text-center bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 font-semibold">Log Out</a>
-
-      </div>
-    </div>
+      <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 rounded-xl hover:bg-blue-700">
+        Send Message
+      </button>
+    </form>
   </main>
 
 </body>

@@ -18,10 +18,11 @@
     <div class="container mx-auto flex justify-between items-center">
       <a href="#" class="text-xl font-bold text-blue-600">NewsHub</a>
       <div class="space-x-4">
-        <a href="#" class="text-gray-600 hover:text-blue-600 font-semibold">Home</a>
-        <a href="#" class="text-gray-600 hover:text-blue-600">Contact</a>
-        <a href="#" class="text-gray-600 hover:text-blue-600">About Us</a>
-        <a href="#" class="text-gray-600 hover:text-blue-600">Profile</a>
+        <a href="{% url 'home' %}" class="text-gray-600 hover:text-blue-600 font-semibold">Home</a>
+        <a href="{% url 'news_list' %}" class="text-gray-600 hover:text-blue-600">News</a>
+        <a href="{% url 'contact' %}" class="text-gray-600 hover:text-blue-600">Contact</a>
+        <a href="{% url 'about' %}" class="text-gray-600 hover:text-blue-600">About Us</a>
+        <a href="{% url 'profile' %}" class="text-gray-600 hover:text-blue-600">Profile</a>
       </div>
     </div>
   </nav>

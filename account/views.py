@@ -14,10 +14,10 @@ def sign_up_view(request):
             username = form.cleaned_data['username']
             if User.objects.filter(username=username).exists():
                 messages.error(request, 'Such a user exists. Please log in')
-                return redirect('login')
+                return redirect('log_in')
             form.save()
             messages.success(request, 'Successfully authorized. Log in')
-            return redirect('login')
+            return redirect('log_in')
     form = SignUpForm()
     return render(request, 'account/sign_up.html', {'form':form})
 

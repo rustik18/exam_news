@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Change Password – NewsHub</title>
+
+  <!-- TailwindCSS + Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="#" class="text-xl font-bold text-blue-600">NewsHub</a>
+      <div class="space-x-4">
+        <a href="#" class="text-gray-600 hover:text-blue-600">Home</a>
+        <a href="#" class="text-gray-600 hover:text-blue-600">Contact</a>
+        <a href="#" class="text-gray-600 hover:text-blue-600">About Us</a>
+        <a href="#" class="text-gray-600 hover:text-blue-600 font-semibold">Profile</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Password Change Form -->
+  <main class="flex-grow flex items-center justify-center px-4 py-10">
+    <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
+      <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Change Password</h2>
+
+      {% if form.non_field_errors %}
+        <div class="mb-4 text-red-600 text-sm text-center">
+          {{ form.non_field_errors.0 }}
+        </div>
+      {% endif %}
+
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">{{ form.old_pass.label }}</label>
+          {{ form.old_pass }}
+          {% if form.old_pass.errors %}
+            <div class="text-red-600 text-sm">{{ form.old_pass.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">{{ form.new_pass.label }}</label>
+          {{ form.new_pass }}
+          {% if form.new_pass.errors %}
+            <div class="text-red-600 text-sm">{{ form.new_pass.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">{{ form.confirm_pass.label }}</label>
+          {{ form.confirm_pass }}
+          {% if form.confirm_pass.errors %}
+            <div class="text-red-600 text-sm">{{ form.confirm_pass.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">{{ form.code.label }}</label>
+          {{ form.code }}
+          {% if form.code.errors %}
+            <div class="text-red-600 text-sm">{{ form.code.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 rounded-xl hover:bg-blue-700 transition">
+          Change Password
+        </button>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>
